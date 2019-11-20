@@ -76,7 +76,7 @@ h1{
     color: #ffffff;
     border-top: #333 7px solid;
     border-bottom: #333 7px solid;
-    background-image: url(../img/contactUs.jfif);
+    background-image: url(../img/contactus.jpg);
     background-position: center;
     background-size: contain;
 }
@@ -187,17 +187,3 @@ ul li a:hover span:nth-child(4){
 footer{
     padding: 25px;
 }
-/* 
-#firstimage{
-    position: center;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    text-align: center;
-}
-.fullscreen{
-    max-width: 99%;
-    max-height: 99%;
-
-} */

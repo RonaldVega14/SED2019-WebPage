@@ -1,19 +1,45 @@
+<?php
+  session_start();
+  require 'database.php';
+  if (isset($_SESSION['user_id'])) {
+    $records = $conn->prepare('SELECT id, email, password FROM users WHERE id = :id');
+    $records->bindParam(':id', $_SESSION['user_id']);
+    $records->execute();
+    $results = $records->fetch(PDO::FETCH_ASSOC);
+    $user = null;
+    if (count($results) > 0) {
+      $user = $results;
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html>
-	<head>
+  
+
+  <head>
 		<meta charset="utf-8">
 		<title>PimpMyRide</title>
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700%7CRoboto%7CJosefin+Sans:100,300,400,500" rel="stylesheet" type="text/css">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    	<link rel="stylesheet" href="css/style.css">
+    	<link rel="stylesheet" href="assets/css/style1.css">
     	<script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 
 	</head>
-<body>
-    <!--Navigation bar-->
-	<nav class="navbar navbar-default navbar-fixed-top">
+
+
+
+    
+  <body>
+    <?php require 'partials/header.php' ?>
+
+    <?php if(!empty($user)): ?>
+     
+      
+ <!--Navigation bar-->
+ <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -26,9 +52,10 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="about.html">Acerca de</a></li>
-                    <li><a href="contact.html">Contáctanos</a></li>
+                    <li><a href="index.php">Inicio</a></li>
+                    <li><a href="about.php">Acerca de</a></li>
+                    <li><a href="contact.php">Contáctanos</a></li>
+                    <li><a href="logout.php">LOGOUT</a></li>
             </ul>
             </div><!--/.nav-collapse -->
         </div>
@@ -176,6 +203,17 @@
 		  set_body_height();
 		});
 	  </script>
-</body>
 
+
+
+
+
+      </a>
+    <?php else: ?>
+      <h1>Please Login or SignUp</h1>
+
+      <a href="login.php">Login</a> or
+      <a href="signup.php">SignUp</a>
+    <?php endif; ?>
+  </body>
 </html>
